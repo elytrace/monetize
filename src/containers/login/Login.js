@@ -39,19 +39,6 @@ const Login = () => {
       })
   }
 
-  const getUserInfo = () => {
-    api
-      .create()
-      .getUserInfo(16)
-      .then((response) => {
-        console.log('response = ', response)
-      })
-      .catch((error) => {
-        const { message } = error
-        console.log('error: ', message)
-      })
-  }
-
   const handleUserName = (event) => {
     setState({ ...state, userName: event.target.value })
   }
@@ -84,7 +71,7 @@ const Login = () => {
           />
         </Row>
         <Button onClick={login}>Login</Button>
-        <Button onClick={getUserInfo}>getUserInfo</Button>
+        {/* <Button onClick={getUserInfo}>getUserInfo</Button> */}
       </PopupLoginWrapper>
     </Wrapper>
   )

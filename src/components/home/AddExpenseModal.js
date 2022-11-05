@@ -1,6 +1,6 @@
 import { Form, Modal, Button } from "react-bootstrap"
 import { useRef } from "react"
-import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "../contexts/BudgetsContext"
+import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "../../contexts/BudgetsContext"
 
 export default function AddExpenseModal({
   show,
@@ -9,6 +9,7 @@ export default function AddExpenseModal({
 }) {
   const descriptionRef = useRef()
   const amountRef = useRef()
+  const dateRef = useRef()
   const budgetIdRef = useRef()
   const { addExpense, budgets } = useBudgets()
 
@@ -17,6 +18,7 @@ export default function AddExpenseModal({
     addExpense({
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value),
+      date: dateRef.current.value,
       budgetId: budgetIdRef.current.value,
     })
     handleClose()
@@ -41,6 +43,14 @@ export default function AddExpenseModal({
               required
               min={0}
               step={0.01}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="date">
+            <Form.Label>Date</Form.Label>
+            <Form.Control
+              ref={dateRef}
+              type="date"
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="budgetId">

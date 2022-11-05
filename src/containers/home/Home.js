@@ -1,20 +1,23 @@
 import { Button, Stack } from "react-bootstrap"
 import Container from "react-bootstrap/Container"
-import AddBudgetModal from "../../components/AddBudgetModal"
-import AddExpenseModal from "../../components/AddExpenseModal"
-import ViewExpensesModal from "../../components/ViewExpensesModal"
-import BudgetCard from "../../components/BudgetCard"
-import UncategorizedBudgetCard from "../../components/UncategorizedBudgetCard"
-import TotalBudgetCard from "../../components/TotalBudgetCard"
+import AddBudgetModal from "../../components/home/AddBudgetModal"
+import AddExpenseModal from "../../components/home/AddExpenseModal"
+import ViewExpensesModal from "../../components/home/ViewExpensesModal"
+import BudgetCard from "../../components/home/BudgetCard"
+import UncategorizedBudgetCard from "../../components/home/UncategorizedBudgetCard"
+import TotalBudgetCard from "../../components/home/TotalBudgetCard"
 import { useState } from "react"
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../../contexts/BudgetsContext"
+import Navbar from "../../components/sidebar/Navbar"
 
 function Home() {
+  // window.localStorage.clear()
+
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
   const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState()
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState()
-  const { budgets, getBudgetExpenses } = useBudgets()
+  const { budgets, getBudgetExpenses, getMonth } = useBudgets()
 
   function openAddExpenseModal(budgetId) {
     setShowAddExpenseModal(true)
@@ -23,6 +26,7 @@ function Home() {
 
   return (
     <>
+      <Navbar />
       <Container className="my-4">
         <Stack direction="horizontal" gap="2" className="mb-4">
           <h1 className="me-auto">HOME</h1>

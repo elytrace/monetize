@@ -17,9 +17,15 @@ export const BudgetsProvider = ({ children }) => {
   function getBudgetExpenses(budgetId) {
     return expenses.filter(expense => expense.budgetId === budgetId)
   }
-  function addExpense({ description, amount, budgetId }) {
+  function getMonth(date) {
+    return date.substring(5,7)
+  }
+  function getDateExpenses(month) {
+    return expenses.filter(expense => getMonth(expense.date) === month)
+  }
+  function addExpense({ description, date, amount, budgetId }) {
     setExpenses(prevExpenses => {
-      return [...prevExpenses, { id: uuidV4(), description, amount, budgetId }]
+      return [...prevExpenses, { id: uuidV4(), description, date, amount, budgetId }]
     })
   }
   function addBudget({ name, max }) {
@@ -54,10 +60,12 @@ export const BudgetsProvider = ({ children }) => {
         budgets,
         expenses,
         getBudgetExpenses,
+        getDateExpenses,
         addExpense,
         addBudget,
         deleteBudget,
         deleteExpense,
+        getMonth,
       }}
     >
       {children}
